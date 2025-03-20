@@ -8,7 +8,7 @@ namespace FizzBuzzApp.Models
 {
     public class FizzBuzzResult
     {
-        public string? OutputString { get; set; }
-        public int Count { get; set; }
+        public string? OutputString { get; set; } //processed string
+        public int Count { get; set; } //count of occurrences
     }
 }
