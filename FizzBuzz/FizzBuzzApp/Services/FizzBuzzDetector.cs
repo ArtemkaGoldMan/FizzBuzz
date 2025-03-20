@@ -18,7 +18,7 @@ namespace FizzBuzzApp.Services
                 throw new ArgumentException("Input string length must be between 7 and 100 characters.", nameof(input));
             }
 
-            var tokens = Regex.Split(input, @"(\W+)").ToList();
+            var tokens = Regex.Split(input, @"(\s+|[,!?.])").ToList();
 
             int wordCount = 0;
             int coincedencesCount = 0;
@@ -27,7 +27,7 @@ namespace FizzBuzzApp.Services
 
             foreach (var token in tokens)
             {
-                if (string.IsNullOrWhiteSpace(token) || !token.All(char.IsLetterOrDigit))
+                if (string.IsNullOrWhiteSpace(token) || Regex.IsMatch(token, @"^[\W_]+$"))
                 {
                     outputTokens.Add(token);
                 }
