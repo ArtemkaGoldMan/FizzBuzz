@@ -1,14 +1,13 @@
 using FizzBuzzApp.Models;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FizzBuzzApp.Services
 {
-
     public class FizzBuzzDetector : IFizzBuzzDetector
     {
         public FizzBuzzResult GetOverlappings(string input)
         {
-
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input), "Input string cannot be null.");
@@ -19,13 +18,51 @@ namespace FizzBuzzApp.Services
                 throw new ArgumentException("Input string length must be between 7 and 100 characters.", nameof(input));
             }
 
-            // TODO: Implement the FizzBuzz logic
+            var tokens = Regex.Split(input, @"(\W+)").ToList();
+
+            int wordCount = 0;
+            int coincedencesCount = 0;
+            var outputTokens = new List<string>();
+
+
+            foreach (var token in tokens)
+            {
+                if (string.IsNullOrWhiteSpace(token) || !token.All(char.IsLetterOrDigit))
+                {
+                    outputTokens.Add(token);
+                }
+                else
+                {
+                    wordCount++;
+                    if (wordCount % 3 == 0 && wordCount % 5 == 0)
+                    {
+                        outputTokens.Add("FizzBuzz");
+                        coincedencesCount++;
+                    }
+                    else if (wordCount % 3 == 0)
+                    {
+                        outputTokens.Add("Fizz");
+                        coincedencesCount++;
+                    }
+                    else if (wordCount % 5 == 0)
+                    {
+                        outputTokens.Add("Buzz");
+                        coincedencesCount++;
+                    }
+                    else
+                    {
+                        outputTokens.Add(token);
+                    }
+                }
+            }
+
+            var outputString = string.Join("", outputTokens);
 
             return new FizzBuzzResult
             {
-                OutputString = string.Empty,
-                Count = 0
+                OutputString = outputString,
+                Count = coincedencesCount,
             };
         }
     }
-} 
+}

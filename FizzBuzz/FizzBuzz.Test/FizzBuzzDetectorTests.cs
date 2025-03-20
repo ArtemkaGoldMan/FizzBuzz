@@ -24,7 +24,9 @@ namespace FizzBuzz.Test
 
         [Theory]
         [InlineData("short")]  // 5 characters, less than minimum 7
-        [InlineData("AaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaaA")]  // 101 characters, more than maximum 100
+        [InlineData("AaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaa"+
+                    "AaaaaaaaaaAaaaaaaaaaAaaaaaaaaaAaaaaaaaaa"+
+                    "AaaaaaaaaaAaaaaaaaaaA")]  // 101 characters, more than maximum 100
         public void GetOverlappings_InvalidLength_ThrowsArgumentException(string input)
         {
             // Act & Assert
@@ -42,7 +44,7 @@ namespace FizzBuzz.Test
 
             // Assert
             Assert.Equal("Word1 word2 Fizz word4 Buzz Fizz word7 word8", result.OutputString);
-            Assert.Equal(2, result.Count);
+            Assert.Equal(3, result.Count);
         }
 
         [Fact]
@@ -57,7 +59,7 @@ namespace FizzBuzz.Test
             // Assert
             string expected = "1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz";
             Assert.Equal(expected, result.OutputString);
-            Assert.Equal(9, result.Count);
+            Assert.Equal(7, result.Count);
         }
     }
 }
