@@ -4,8 +4,19 @@ using System.Text.RegularExpressions;
 
 namespace FizzBuzzApp.Services
 {
+    /// <summary>
+    /// FizzBuzzDetector provides the functionality to process a string and replace every third word with "Fizz" and every fifth word with "Buzz". If the third and fifth words are the same, then replace with "FizzBuzz" 
+    /// </summary>
     public class FizzBuzzDetector : IFizzBuzzDetector
     {
+        /// <summary>
+        /// Processes the input string and returns a result with words replaced by "Fizz", "Buzz", or "FizzBuzz" based on their positions.
+        /// Counts occurrences of "Fizz", "Buzz", and "FizzBuzz".
+        /// </summary>
+        /// <param name="input">The input string to be processed.</param>
+        /// <returns>A FizzBuzzResult containing the processed string and the count of Fizz, Buzz, and FizzBuzz occurrences.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the input is null.</exception>
+        /// <exception cref="ArgumentException">Thrown when the input length is outside the 7 to 100 characters range.</exception>
         public FizzBuzzResult GetOverlappings(string input)
         {
             if (input == null)
@@ -20,7 +31,7 @@ namespace FizzBuzzApp.Services
 
             var tokens = Regex.Split(input, @"(\s+|[,!?.])").ToList();
 
-            int wordCount = 0;
+            int wordCount = 0; // index for words ONLY(no other symbols, spaces, etc.)
             int coincedencesCount = 0;
             var outputTokens = new List<string>();
 
